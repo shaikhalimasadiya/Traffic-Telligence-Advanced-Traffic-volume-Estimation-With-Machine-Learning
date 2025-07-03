@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Volume Estimation</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='traffic_bg.png') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #000;
+        }
 
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 25px;
+            border-radius: 12px;
+            width: 320px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 6px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .output {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #000;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 1px 1px white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">Traffic Volume Estimation</div>
+
+    <div class="container">
+        <form action="/predict" method="post">
+            <h2>Enter the Following Details</h2>
+
+            <label for="holiday">Holiday:</label>
+            <select name="holiday">
+                <option value="None">None</option>
+                <option value="Holiday">Holiday</option>
+            </select>
+
+            <label for="temp">Temperature:</label>
+            <input type="text" name="temp" placeholder="Enter temperature">
+
+            <label for="rain">Rain:</label>
+            <input type="text" name="rain" placeholder="Enter rain value">
+
+            <label for="snow">Snow:</label>
+            <input type="text" name="snow" placeholder="Enter snow value">
+
+            <label for="weather">Weather:</label>
+            <select name="weather">
+                <option value="Clear">Clear</option>
+                <option value="Clouds">Clouds</option>
+                <option value="Rain">Rain</option>
+                <option value="Mist">Mist</option>
+                <option value="Snow">Snow</option>
+            </select>
+
+            <label for="year">Year:</label>
+            <input type="text" name="year" placeholder="YYYY">
+
+            <label for="month">Month:</label>
+            <input type="text" name="month" placeholder="MM">
+
+            <label for="day">Day:</label>
+            <input type="text" name="day" placeholder="DD">
+
+            <label for="hours">Hour:</label>
+            <input type="text" name="hours" placeholder="HH (24hr format)">
+
+            <label for="minutes">Minute:</label>
+            <input type="text" name="minutes" placeholder="MM">
+
+            <label for="seconds">Second:</label>
+            <input type="text" name="seconds" placeholder="SS">
+
+            <input type="submit" value="Predict">
+        </form>
+
+        <div class="output">
+            {{ prediction_text }}
+        </div>
+    </div>
+
+</body>
+</html>
